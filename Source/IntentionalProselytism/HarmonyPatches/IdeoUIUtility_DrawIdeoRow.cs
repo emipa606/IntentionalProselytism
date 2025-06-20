@@ -10,28 +10,28 @@ namespace IntentionalProselytism.HarmonyPatches;
 [HarmonyPatch(typeof(IdeoUIUtility), "DrawIdeoRow")]
 internal static class IdeoUIUtility_DrawIdeoRow
 {
-    internal static bool canDelete;
+    internal static bool CanDelete;
 
     internal static void Postfix(Ideo ideo, float curY, Rect fillRect, List<Pawn> pawns)
     {
-        if (ideo != IdeoUIUtility.selected || pawns?.Count > 0 || !ideo.CanDelete())
+        if (ideo != IdeoUIUtility.selected || pawns?.Count > 0 || !ideo.canDeleteIdeo())
         {
             return;
         }
 
-        DoDeleteIcon(new Rect(0, curY - 46, fillRect.width, 46f), ideo);
+        doDeleteIcon(new Rect(0, curY - 46, fillRect.width, 46f), ideo);
     }
 
-    internal static bool CanDelete(this Ideo ideo)
+    private static bool canDeleteIdeo(this Ideo ideo)
     {
-        canDelete = Find.FactionManager.AllFactionsInViewOrder.All(x => !(x.ideos?.Has(ideo) ?? false)) &&
+        CanDelete = Find.FactionManager.AllFactionsInViewOrder.All(x => !(x.ideos?.Has(ideo) ?? false)) &&
                     PawnsFinder.AllMapsAndWorld_Alive.All(x => x.Ideo != ideo);
-        return canDelete;
+        return CanDelete;
     }
 
-    internal static void DoDeleteIcon(Rect viewRect, Ideo ideo)
+    private static void doDeleteIcon(Rect viewRect, Ideo ideo)
     {
-        var size = 24f;
+        const float size = 24f;
         var rect = new Rect(viewRect.x + viewRect.width - size, viewRect.y + ((viewRect.height - size) / 2), size,
             size);
         if (Widgets.ButtonImage(rect, TexButton.Delete, Color.white, GenUI.SubtleMouseoverColor))

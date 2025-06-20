@@ -22,7 +22,7 @@ internal static class VFEMech_Building_IndoctrinationPod_GetGizmos_d_13_MoveNext
 
     internal static bool Prepare()
     {
-        return ModLister.HasActiveModWithName(IntentionalProselytismMod.Modname_VFEM);
+        return ModLister.HasActiveModWithName(IntentionalProselytismMod.ModnameVfem);
     }
 
     internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
@@ -42,7 +42,7 @@ internal static class VFEMech_Building_IndoctrinationPod_GetGizmos_d_13_MoveNext
 
     internal static IEnumerable<Ideo> GetIdeos(IEnumerable<Ideo> original)
     {
-        return IntentionalProselytismSettings.unlockVFEMIndoctrinationPod
+        return IntentionalProselytismSettings.UnlockVfemIndoctrinationPod
             ? Find.IdeoManager.IdeosListForReading
             : original;
     }

@@ -12,7 +12,7 @@ namespace IntentionalProselytism.HarmonyPatches;
 [HarmonyPatch(typeof(SocialCardUtility), nameof(SocialCardUtility.DrawSocialCard))]
 internal static class SocialCardUtility_DrawSocialCard
 {
-    internal static readonly FieldInfo SocialCardUtility__RoleChangeButtonSize =
+    private static readonly FieldInfo socialCardUtilityRoleChangeButtonSize =
         AccessTools.DeclaredField(typeof(SocialCardUtility), "RoleChangeButtonSize");
 
     internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
@@ -56,7 +56,7 @@ internal static class SocialCardUtility_DrawSocialCard
             return;
         }
 
-        var RoleChangeButtonSize = (Vector2)SocialCardUtility__RoleChangeButtonSize.GetValue(null);
+        var RoleChangeButtonSize = (Vector2)socialCardUtilityRoleChangeButtonSize.GetValue(null);
         var y = rect.y + (rect.height / 2f) - 14f;
         var rect2 = new Rect(rect.width - 150f, y, RoleChangeButtonSize.x, RoleChangeButtonSize.y)
         {
@@ -81,11 +81,11 @@ internal static class SocialCardUtility_DrawSocialCard
         }
 
         var options = new List<FloatMenuOption>();
-        var ideo = IntentionalProselytismMod._datastorage.GetIdeo(pawn);
+        var ideo = IntentionalProselytismMod.DataStorage.GetIdeo(pawn);
         if (ideo != null)
         {
             options.Add(new FloatMenuOption(TranslationKeys.RemoveCurrentIdeo.Translate(),
-                () => IntentionalProselytismMod._datastorage.RemoveIdeo(pawn), Widgets.PlaceholderIconTex,
+                () => IntentionalProselytismMod.DataStorage.RemoveIdeo(pawn), Widgets.PlaceholderIconTex,
                 Color.white));
         }
 
@@ -94,12 +94,12 @@ internal static class SocialCardUtility_DrawSocialCard
             if (i != pawn.Ideo)
             {
                 options.Add(new FloatMenuOption(i.name,
-                    () => IntentionalProselytismMod._datastorage.SetIdeo(pawn, i), i.Icon, i.Color));
+                    () => IntentionalProselytismMod.DataStorage.SetIdeo(pawn, i), i.Icon, i.Color));
             }
         }
 
         options.Add(new FloatMenuOption(TranslationKeys.DisableProselyting.Translate(),
-            () => IntentionalProselytismMod._datastorage.SetDiabled(pawn), HarmonyBase.Icon_DisabledProselyting,
+            () => IntentionalProselytismMod.DataStorage.SetDiabled(pawn), HarmonyBase.Icon_DisabledProselyting,
             Color.white));
         Find.WindowStack.Add(new FloatMenu(options));
     }
@@ -111,8 +111,8 @@ internal static class SocialCardUtility_DrawSocialCard
             return;
         }
 
-        var ideo = IntentionalProselytismMod._datastorage.GetIdeo(pawn);
-        var disabled = IntentionalProselytismMod._datastorage.GetDisabled(pawn);
+        var ideo = IntentionalProselytismMod.DataStorage.GetIdeo(pawn);
+        var disabled = IntentionalProselytismMod.DataStorage.GetDisabled(pawn);
         var num = rect.x + 17f;
         if (disabled || ideo != null)
         {
@@ -132,8 +132,8 @@ internal static class SocialCardUtility_DrawSocialCard
             GUI.color = Color.grey;
         }
 
-        var RoleChangeButtonSize = (Vector2)SocialCardUtility__RoleChangeButtonSize.GetValue(null);
-        var rect2 = new Rect(rect.x + 17f, rect.y + (rect.height / 2f) - 16f, rect.width - num - RoleChangeButtonSize.x,
+        var roleChangeButtonSize = (Vector2)socialCardUtilityRoleChangeButtonSize.GetValue(null);
+        var rect2 = new Rect(rect.x + 17f, rect.y + (rect.height / 2f) - 16f, rect.width - num - roleChangeButtonSize.x,
             32f);
         var rect3 = rect;
         rect3.xMin = num;
@@ -149,7 +149,7 @@ internal static class SocialCardUtility_DrawSocialCard
             if (disabled)
             {
                 roleDesc = TranslationKeys.IdeoDesc.Translate() + "\n\n" +
-                           TranslationKeys.DisableProselyting__Desc.Translate();
+                           TranslationKeys.DisableProselytingDesc.Translate();
             }
             else if (ideo != null)
             {

@@ -14,7 +14,7 @@ internal static class Pawn_IdeoTracker_IdeoConversionAttempt
             return;
         }
 
-        var res = IntentionalProselytismMod._datastorage.GetIdeo(___pawn);
+        var res = IntentionalProselytismMod.DataStorage.GetIdeo(___pawn);
         if (res == null)
         {
             return;

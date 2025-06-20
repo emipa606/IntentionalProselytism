@@ -4,24 +4,24 @@ namespace IntentionalProselytism;
 
 public class IntentionalProselytismSettings : ModSettings
 {
-    public static float certaintyReduceFactor = 0.2f;
-    public static bool unlockVFEMIndoctrinationPod;
-    public static bool disableInterColonistProselytizing;
+    public static float CertaintyReduceFactor = 0.2f;
+    public static bool UnlockVfemIndoctrinationPod;
+    public static bool DisableInterColonistProselytizing;
 
     public override void ExposeData()
     {
-        if (certaintyReduceFactor < 0.05f)
+        if (CertaintyReduceFactor < 0.05f)
         {
-            certaintyReduceFactor = 0.05f;
+            CertaintyReduceFactor = 0.05f;
         }
 
-        Scribe_Values.Look(ref certaintyReduceFactor, "certaintyReduceFactor", 0.2f);
-        if (certaintyReduceFactor < 0.05f)
+        Scribe_Values.Look(ref CertaintyReduceFactor, "certaintyReduceFactor", 0.2f);
+        if (CertaintyReduceFactor < 0.05f)
         {
-            certaintyReduceFactor = 0.05f;
+            CertaintyReduceFactor = 0.05f;
         }
 
-        Scribe_Values.Look(ref unlockVFEMIndoctrinationPod, "unlockVFEMIndoctrinationPod");
-        Scribe_Values.Look(ref disableInterColonistProselytizing, "disableInterColonistProselytizing");
+        Scribe_Values.Look(ref UnlockVfemIndoctrinationPod, "unlockVFEMIndoctrinationPod");
+        Scribe_Values.Look(ref DisableInterColonistProselytizing, "disableInterColonistProselytizing");
     }
 }

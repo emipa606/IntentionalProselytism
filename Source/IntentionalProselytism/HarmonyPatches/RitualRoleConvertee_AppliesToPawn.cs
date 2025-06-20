@@ -46,7 +46,7 @@ internal static class RitualRoleConvertee_AppliesToPawn
 
     internal static bool SameIdeo(Pawn p, RitualRoleAssignments assignment)
     {
-        var ideo = IntentionalProselytismMod._datastorage.GetIdeo(p) ?? p.Ideo;
+        var ideo = IntentionalProselytismMod.DataStorage.GetIdeo(p) ?? p.Ideo;
         return ideo == assignment?.Ritual.ideo;
     }
 }

@@ -1,4 +1,4 @@
-# [Intentional Proselytism (Continued)]()
+# [Intentional Proselytism (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=3361248013)
 
 ![Image](https://i.imgur.com/buuPQel.png)
 
@@ -43,4 +43,4 @@ Safe for mid-game saves
 
  
 
-[![Image](https://img.shields.io/github/v/release/emipa606/IntentionalProselytism?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/) | tags: conversion,  prisoner,  slave
+[![Image](https://img.shields.io/github/v/release/emipa606/IntentionalProselytism?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/3361248013) | tags: conversion,  prisoner,  slave

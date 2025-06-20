@@ -29,7 +29,7 @@ internal static class IdeoUIUtility_DoIdeoDetails
 
     internal static IdeoEditMode ChangeMode(IdeoEditMode mode)
     {
-        return mode == IdeoEditMode.Dev || mode == IdeoEditMode.Reform ? mode :
-            IdeoUIUtility_DrawIdeoRow.canDelete ? IdeoEditMode.GameStart : mode;
+        return mode is IdeoEditMode.Dev or IdeoEditMode.Reform ? mode :
+            IdeoUIUtility_DrawIdeoRow.CanDelete ? IdeoEditMode.GameStart : mode;
     }
 }

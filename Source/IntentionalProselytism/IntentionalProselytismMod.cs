@@ -11,15 +11,15 @@ namespace IntentionalProselytism;
 
 public class IntentionalProselytismMod : Mod
 {
-    internal const string Modname_VFEM = "Vanilla Factions Expanded - Mechanoids";
+    internal const string ModnameVfem = "Vanilla Factions Expanded - Mechanoids";
 
-    internal static DataStorage _datastorage;
+    internal static DataStorage DataStorage;
 
-    internal static readonly Type type_Building_IndoctrinationPod =
+    private static readonly Type typeBuildingIndoctrinationPod =
         AccessTools.TypeByName("VFEMech.Building_IndoctrinationPod");
 
-    internal static readonly FieldInfo field_ideoConversionTarget =
-        AccessTools.Field(type_Building_IndoctrinationPod, "ideoConversionTarget");
+    private static readonly FieldInfo fieldIdeoConversionTarget =
+        AccessTools.Field(typeBuildingIndoctrinationPod, "ideoConversionTarget");
 
     private static string currentVersion;
 
@@ -35,22 +35,22 @@ public class IntentionalProselytismMod : Mod
         var label = TranslationKeys.CertaintyReduceFactor.Translate();
         var labelSize = Text.CalcSize(label);
         var rect = new Rect(canvas.x, canvas.y, labelSize.x + 10f, Text.LineHeight);
-        IntentionalProselytismSettings.certaintyReduceFactor = Widgets.HorizontalSlider(rect,
-            IntentionalProselytismSettings.certaintyReduceFactor, 0.05f, 0.5f, true, label);
-        TooltipHandler.TipRegion(rect, TranslationKeys.CertaintyReduceFactor__Desc.Translate());
+        IntentionalProselytismSettings.CertaintyReduceFactor = Widgets.HorizontalSlider(rect,
+            IntentionalProselytismSettings.CertaintyReduceFactor, 0.05f, 0.5f, true, label);
+        TooltipHandler.TipRegion(rect, TranslationKeys.CertaintyReduceFactorDesc.Translate());
         rect = new Rect(canvas.x + 220, canvas.y, 50, Text.LineHeight);
-        Widgets.Label(rect, IntentionalProselytismSettings.certaintyReduceFactor.ToString());
+        Widgets.Label(rect, IntentionalProselytismSettings.CertaintyReduceFactor.ToString());
         rect = new Rect(canvas.x, canvas.y + Text.LineHeight, 100, Text.LineHeight);
         if (Widgets.ButtonText(rect, TranslationKeys.ResetToDefault.Translate()))
         {
-            IntentionalProselytismSettings.certaintyReduceFactor = 0.2f;
+            IntentionalProselytismSettings.CertaintyReduceFactor = 0.2f;
         }
 
         label = TranslationKeys.DisableInterColonistProselytizing.Translate();
         rect = new Rect(canvas.x, rect.y + Text.LineHeight, Text.CalcSize(label).x + Text.LineHeight + 10f,
             Text.LineHeight);
-        Widgets.CheckboxLabeled(rect, label, ref IntentionalProselytismSettings.disableInterColonistProselytizing);
-        TooltipHandler.TipRegion(rect, TranslationKeys.DisableInterColonistProselytizing__Desc.Translate());
+        Widgets.CheckboxLabeled(rect, label, ref IntentionalProselytismSettings.DisableInterColonistProselytizing);
+        TooltipHandler.TipRegion(rect, TranslationKeys.DisableInterColonistProselytizingDesc.Translate());
 
         if (currentVersion != null)
         {
@@ -61,23 +61,23 @@ public class IntentionalProselytismMod : Mod
             GUI.contentColor = Color.white;
         }
 
-        if (!ModLister.HasActiveModWithName(Modname_VFEM))
+        if (!ModLister.HasActiveModWithName(ModnameVfem))
         {
             return;
         }
 
-        label = TranslationKeys.UnlockVFEMIndoctrinationPod.Translate();
+        label = TranslationKeys.UnlockVfemIndoctrinationPod.Translate();
         rect = new Rect(canvas.x, rect.y + Text.LineHeight, Text.CalcSize(label).x + Text.LineHeight + 10f,
             Text.LineHeight);
-        Widgets.CheckboxLabeled(rect, label, ref IntentionalProselytismSettings.unlockVFEMIndoctrinationPod);
-        TooltipHandler.TipRegion(rect, TranslationKeys.UnlockVFEMIndoctrinationPod__Desc.Translate());
-        if (!IntentionalProselytismSettings.unlockVFEMIndoctrinationPod &&
+        Widgets.CheckboxLabeled(rect, label, ref IntentionalProselytismSettings.UnlockVfemIndoctrinationPod);
+        TooltipHandler.TipRegion(rect, TranslationKeys.UnlockVfemIndoctrinationPodDesc.Translate());
+        if (!IntentionalProselytismSettings.UnlockVfemIndoctrinationPod &&
             Current.ProgramState == ProgramState.Playing)
         {
             Find.Maps.ForEach(x =>
                 x.spawnedThings
-                    .Where(thing => type_Building_IndoctrinationPod.IsAssignableFrom(thing.def.thingClass)).ToList()
-                    .ForEach(y => field_ideoConversionTarget.SetValue(y, Faction.OfPlayer.ideos.PrimaryIdeo)));
+                    .Where(thing => typeBuildingIndoctrinationPod.IsAssignableFrom(thing.def.thingClass)).ToList()
+                    .ForEach(y => fieldIdeoConversionTarget.SetValue(y, Faction.OfPlayer.ideos.PrimaryIdeo)));
         }
     }
 

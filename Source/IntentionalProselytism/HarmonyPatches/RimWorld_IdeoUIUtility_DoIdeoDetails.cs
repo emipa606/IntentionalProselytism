@@ -11,8 +11,8 @@ namespace IntentionalProselytism.HarmonyPatches;
 [HarmonyPatch(typeof(IdeoUIUtility), nameof(IdeoUIUtility.DoIdeoDetails))]
 internal static class RimWorld_IdeoUIUtility_DoIdeoDetails
 {
-    internal static string text;
-    internal static float textWidth;
+    private static string text;
+    private static float textWidth;
 
     static RimWorld_IdeoUIUtility_DoIdeoDetails()
     {
@@ -55,7 +55,7 @@ internal static class RimWorld_IdeoUIUtility_DoIdeoDetails
 
     internal static void MakeFluid(float curY, Rect inRect, Ideo ideo)
     {
-        if (ideo.Fluid || !CanFluid(ideo))
+        if (ideo.Fluid || !canFluid(ideo))
         {
             return;
         }
@@ -71,7 +71,7 @@ internal static class RimWorld_IdeoUIUtility_DoIdeoDetails
         ideo.development.reformCount = ideo.memes.Count - 2;
     }
 
-    internal static bool CanFluid(Ideo ideo)
+    private static bool canFluid(Ideo ideo)
     {
         return !Find.FactionManager.AllFactionsInViewOrder.Any(x =>
                    x != Faction.OfPlayer && (x.ideos?.Has(ideo) ?? false)) &&

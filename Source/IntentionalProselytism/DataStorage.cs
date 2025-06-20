@@ -10,7 +10,7 @@ public class DataStorage(World world) : WorldComponent(world)
     private static int version;
     private HashSet<int> disableProselyting = [];
 
-    private Dictionary<int, Ideo> pawnIdeoData = new Dictionary<int, Ideo>();
+    private Dictionary<int, Ideo> pawnIdeoData = new();
     private List<int> pawnIdeoDataKey;
     private List<Ideo> pawnIdeoDataValue;
 
@@ -20,10 +20,7 @@ public class DataStorage(World world) : WorldComponent(world)
         Scribe_Collections.Look(ref pawnIdeoData, "pawnIdeoData", LookMode.Value, LookMode.Reference,
             ref pawnIdeoDataKey, ref pawnIdeoDataValue);
         Scribe_Collections.Look(ref disableProselyting, "disableProselyting", LookMode.Value);
-        if (disableProselyting == null)
-        {
-            disableProselyting = [];
-        }
+        disableProselyting ??= [];
 
         Scribe_Values.Look(ref version, "version");
     }
@@ -35,7 +32,7 @@ public class DataStorage(World world) : WorldComponent(world)
 
     public void SetIdeo(Pawn pawn, Ideo ideo)
     {
-        RemoveDisabled(pawn);
+        removeDisabled(pawn);
         pawnIdeoData[pawn.thingIDNumber] = ideo;
     }
 
@@ -50,7 +47,7 @@ public class DataStorage(World world) : WorldComponent(world)
         disableProselyting.Add(pawn.thingIDNumber);
     }
 
-    public void RemoveDisabled(Pawn pawn)
+    private void removeDisabled(Pawn pawn)
     {
         disableProselyting.Remove(pawn.thingIDNumber);
     }
@@ -60,14 +57,14 @@ public class DataStorage(World world) : WorldComponent(world)
         return disableProselyting.Contains(pawn.thingIDNumber);
     }
 
-    public override void FinalizeInit()
+    public override void FinalizeInit(bool fromLoad)
     {
-        IntentionalProselytismMod._datastorage = this;
+        IntentionalProselytismMod.DataStorage = this;
     }
 
     public static Ideo GetIdeoStatic(Pawn pawn, Pawn pawn2 = null)
     {
-        var targ = IntentionalProselytismMod._datastorage.GetIdeo(pawn);
+        var targ = IntentionalProselytismMod.DataStorage.GetIdeo(pawn);
         if (targ is not null)
         {
             return targ;

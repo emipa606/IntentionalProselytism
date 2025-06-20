@@ -8,16 +8,16 @@ public static class TranslationKeys
     public const string NoIdeoAssigned = "IntentionalProselytism.NoIdeoAssigned";
     public const string IdeoDesc = "IntentionalProselytism.IdeoDesc";
     public const string Setting = "IntentionalProselytism.Setting";
-    public const string CertaintyReduceFactor__Desc = "IntentionalProselytism.CertaintyReduceFactor.Desc";
+    public const string CertaintyReduceFactorDesc = "IntentionalProselytism.CertaintyReduceFactor.Desc";
     public const string ResetToDefault = "IntentionalProselytism.ResetToDefault";
     public const string CertaintyReduceFactor = "IntentionalProselytism.CertaintyReduceFactor";
-    public const string UnlockVFEMIndoctrinationPod = "IntentionalProselytism.UnlockVFEMIndoctrinationPod";
-    public const string UnlockVFEMIndoctrinationPod__Desc = "IntentionalProselytism.UnlockVFEMIndoctrinationPod.Desc";
+    public const string UnlockVfemIndoctrinationPod = "IntentionalProselytism.UnlockVFEMIndoctrinationPod";
+    public const string UnlockVfemIndoctrinationPodDesc = "IntentionalProselytism.UnlockVFEMIndoctrinationPod.Desc";
     public const string DisableInterColonistProselytizing = "IntentionalProselytism.DisableInterColonistProselytizing";
 
-    public const string DisableInterColonistProselytizing__Desc =
+    public const string DisableInterColonistProselytizingDesc =
         "IntentionalProselytism.DisableInterColonistProselytizing.Desc";
 
     public const string DisableProselyting = "IntentionalProselytism.DisableProselyting";
-    public const string DisableProselyting__Desc = "IntentionalProselytism.DisableProselyting.Desc";
+    public const string DisableProselytingDesc = "IntentionalProselytism.DisableProselyting.Desc";
 }
